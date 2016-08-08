@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane fx:id="instructorList" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cz.lttr.esch.controller.FirstController">
+   <children>
+      <SplitPane dividerPositions="0.4816053511705686" prefHeight="400.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+        <items>
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+            <children>
+                <TableView fx:id="instructorTable" prefHeight="549.0" prefWidth="415.0">
+                    <columns>
+                        <TableColumn prefWidth="75.0" text="Nickname" fx:id="nickNameColumn"/>
+                        <TableColumn prefWidth="75.0" text="First name" fx:id="firstNameColumn"/>
+                        <TableColumn prefWidth="75.0" text="Last name" fx:id="lastNameColumn"/>
+                    </columns>
+                </TableView>
+            </children>
+          </AnchorPane>
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0" />
+        </items>
+      </SplitPane>
+   </children>
+</AnchorPane>
