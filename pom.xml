@@ -1,13 +1,16 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
    <modelVersion>4.0.0</modelVersion>
+
    <groupId>cz.lttr.esch</groupId>
    <artifactId>esch-desktop</artifactId>
    <version>0.0.1-SNAPSHOT</version>
    <name>esch-desktop</name>
+
    <properties>
       <jar.final.name>esch-desktop</jar.final.name>
       <main.class>cz.lttr.esch.App</main.class>
    </properties>
+
    <dependencies>
       <dependency>
          <groupId>junit</groupId>
@@ -16,6 +19,7 @@
          <scope>test</scope>
       </dependency>
    </dependencies>
+
    <build>
       <finalName>${jar.final.name}</finalName>
       <plugins>
@@ -41,11 +45,32 @@
                </archive>
             </configuration>
          </plugin>
-		<plugin>
-			<groupId>org.eluder.coveralls</groupId>
-			<artifactId>coveralls-maven-plugin</artifactId>
-			<version>4.2.0</version>
-		</plugin>
       </plugins>
    </build>
+
+   <profiles>
+       <profile>
+           <id>travis</id>
+           <activation>
+               <property>
+                   <name>env.TRAVIS</name>
+                   <value>true</value>
+               </property>
+           </activation>
+           <build>
+               <plugins>
+                   <plugin>
+                       <groupId>org.jacoco</groupId>
+                       <artifactId>jacoco-maven-plugin</artifactId>
+                       <version>0.7.2.201606060606</version>
+                   </plugin>
+                   <plugin>
+                       <groupId>org.eluder.coveralls</groupId>
+                       <artifactId>coveralls-maven-plugin</artifactId>
+                       <version>4.2.0</version>
+                   </plugin>
+               </plugins>
+           </build>
+       </profile>
+   </profiles>
 </project>
