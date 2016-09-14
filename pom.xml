@@ -9,6 +9,12 @@
       <main.class>cz.lttr.esch.App</main.class>
    </properties>
    <dependencies>
+      <dependency>
+         <groupId>junit</groupId>
+         <artifactId>junit</artifactId>
+         <version>4.12</version>
+         <scope>test</scope>
+      </dependency>
    </dependencies>
    <build>
       <finalName>${jar.final.name}</finalName>
