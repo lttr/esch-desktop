@@ -9,6 +9,7 @@
    <properties>
       <jar.final.name>esch-desktop</jar.final.name>
       <main.class>cz.lttr.esch.App</main.class>
+      <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
    </properties>
 
    <dependencies>
