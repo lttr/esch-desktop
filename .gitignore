@@ -7,3 +7,6 @@ target/
 
 # netbeans
 nbproject/
+
+# logs
+*.log

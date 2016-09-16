@@ -10,10 +10,26 @@ import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
+import java.io.InputStream;
+import java.util.logging.LogManager;
 
 public class App extends Application {
+
+    private static final Logger logger = LoggerFactory.getLogger(App.class);
+
+    static {
+        try (InputStream inputStream = App.class.getResourceAsStream("/logging.properties")) {
+            LogManager.getLogManager().readConfiguration(inputStream);
+        } catch (IOException e) {
+            logger.error(e.getMessage());
+            e.printStackTrace();
+        }
+    }
+
     private Stage primaryStage;
     private BorderPane rootLayout;
 
@@ -47,6 +63,8 @@ public class App extends Application {
 
         // TEMPORARY
         showInstructors();
+
+        logger.info("JavaFX application starts with primary stage titled \"{}\"", primaryStage.getTitle());
     }
 
     private void initRootLayout() {
