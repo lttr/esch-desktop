@@ -4,8 +4,6 @@ import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
-import org.junit.runners.Parameterized.Parameter;
-import org.junit.runners.Parameterized.Parameters;
 
 import java.time.Duration;
 import java.time.LocalTime;
@@ -16,49 +14,50 @@ import java.util.List;
 /**
  * Created by Lukas Trumm on 13.09.2016
  */
+@SuppressWarnings("WeakerAccess")
 @RunWith(Parameterized.class)
 public class ProgramBlockEndTimeTest {
 
-    @Parameters
+    @Parameterized.Parameters
     public static Collection data() {
-        List<Integer> possibleIntervalsInMinutes = new ArrayList<>();
-        for (BasicTimeInterval bti : BasicTimeInterval.values()) {
-            possibleIntervalsInMinutes.add(bti.getMinutes());
+        List<Integer> possibleMilestonesInMinutes = new ArrayList<>();
+        for (BasicTimeMilestones btm : BasicTimeMilestones.values()) {
+            possibleMilestonesInMinutes.add(btm.getMinutes());
         }
-        return possibleIntervalsInMinutes;
+        return possibleMilestonesInMinutes;
     }
 
-    @Parameter
-    public int minutes;
+    @Parameterized.Parameter
+    public int milestone;
 
     /**
-     * For every possible basic time interval the end time of a one hour block will never be rounded.
+     * For every possible basic time milestone the end time of a one hour block will never be rounded.
      */
     @Test
     public void hourLongBlockShouldEndAfter60Minutes() {
-        LocalTime end = LocalTime.of(11, 00);
-        ProgramBlock pb = getProgramBlock60(new Settings(minutes));
+        LocalTime end = LocalTime.of(11, 0);
+        ProgramBlock pb = getProgramBlock60(new Settings(milestone));
         Assert.assertEquals(end, pb.getEndTime());
     }
 
     /**
-     * For every possible basic time interval the end time of a program block
+     * For every possible basic time milestone the end time of a program block
      * will allways be rounded so that the minutes part will be a multiple
-     * of the basic time interval.
+     * of the basic time milestone.
      */
     @Test
-    public void blockShouldBeRoundedToMultipleOfBasicInterval() {
-        ProgramBlock pb60 = getProgramBlock60(new Settings(minutes));
-        Assert.assertEquals("60 minutes block", 0, pb60.getEndTime().getMinute() % minutes);
+    public void blockShouldBeRoundedToMultipleOfBasicMilestone() {
+        ProgramBlock pb60 = getProgramBlock60(new Settings(milestone));
+        Assert.assertEquals("60 minutes block", 0, pb60.getEndTime().getMinute() % milestone);
 
-        ProgramBlock pb56 = getProgramBlock56(new Settings(minutes));
-        Assert.assertEquals("56 minutes block", 0, pb56.getEndTime().getMinute() % minutes);
+        ProgramBlock pb56 = getProgramBlock56(new Settings(milestone));
+        Assert.assertEquals("56 minutes block", 0, pb56.getEndTime().getMinute() % milestone);
 
-        ProgramBlock pb24 = getProgramBlock24(new Settings(minutes));
-        Assert.assertEquals("24 minutes block", 0, pb24.getEndTime().getMinute() % minutes);
+        ProgramBlock pb24 = getProgramBlock24(new Settings(milestone));
+        Assert.assertEquals("24 minutes block", 0, pb24.getEndTime().getMinute() % milestone);
 
-        ProgramBlock pb3 = getProgramBlock3(new Settings(minutes));
-        Assert.assertEquals("3 minutes block", 0, pb3.getEndTime().getMinute() % minutes);
+        ProgramBlock pb3 = getProgramBlock3(new Settings(milestone));
+        Assert.assertEquals("3 minutes block", 0, pb3.getEndTime().getMinute() % milestone);
     }
 
     private ProgramBlock getProgramBlock60(Settings settings) {

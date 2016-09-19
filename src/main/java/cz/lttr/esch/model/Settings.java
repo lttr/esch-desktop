@@ -6,24 +6,24 @@ package cz.lttr.esch.model;
  */
 public class Settings {
 
-    private static final int DEFAULT_BASIC_TIME_INTERVAL = 15;
+    private static final int DEFAULT_BASIC_TIME_MILESTONE = 15;
 
     /**
-     * The basic atomic time interval in minutes.
+     * The basic atomic time milestone in minutes.
      */
-    private int basicTimeInterval;
+    private int basicTimeMilestone;
 
 
     public Settings() {
-        basicTimeInterval = DEFAULT_BASIC_TIME_INTERVAL;
+        basicTimeMilestone = DEFAULT_BASIC_TIME_MILESTONE;
     }
 
-    public Settings(int basicTimeInterval) {
-        this.basicTimeInterval = basicTimeInterval;
+    public Settings(int basicTimeMilestone) {
+        this.basicTimeMilestone = basicTimeMilestone;
     }
 
-    public int getBasicTimeInterval() {
-        return basicTimeInterval;
+    public int getBasicTimeMilestone() {
+        return basicTimeMilestone;
     }
 
 }

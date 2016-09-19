@@ -24,17 +24,39 @@ public class ProgramBlock {
     }
 
     public LocalTime getStartTime() {
-        return roundTimeUp(startTime, settings.getBasicTimeInterval());
+        return roundTimeUp(startTime, settings.getBasicTimeMilestone());
     }
 
     public LocalTime getEndTime() {
         LocalTime exactEndTime = startTime.plus(duration);
-        return roundTimeUp(exactEndTime, settings.getBasicTimeInterval());
+        return roundTimeUp(exactEndTime, settings.getBasicTimeMilestone());
     }
 
+    public void plusDuration(Duration plusDuration) {
+        duration.plus(plusDuration);
+    }
+
+    public void minusDuration(Duration minusDuration) {
+        duration.minus(minusDuration);
+    }
+
+    public void setStartTime(LocalTime startTime) {
+        this.startTime = startTime;
+    }
+
+    /**
+     * Rounds the given time up to a multiple of given minutesMilestone.
+     *
+     * @param time LocalTime with hours and minutes
+     * @param minutesMilestone a number of minutes between 1 and 60
+     * @return LocalTime with hours and minutes rounded to a multiple of the milestone
+     */
     private LocalTime roundTimeUp(LocalTime time, int minutesMilestone) {
+        assert 1 <= minutesMilestone;
+        assert minutesMilestone <= 60;
         int minutes = time.getMinute();
-        int plusMinutes = (minutesMilestone + 60 - minutes) % minutesMilestone;
+        // 60 + milestone creates just big enough number which is a multiple of milestone
+        int plusMinutes = (60 + minutesMilestone - minutes) % minutesMilestone;
         return time.plusMinutes(plusMinutes);
     }
 }
