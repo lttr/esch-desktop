@@ -14,21 +14,20 @@ import java.util.List;
 /**
  * Created by Lukas Trumm on 13.09.2016
  */
-@SuppressWarnings("WeakerAccess")
 @RunWith(Parameterized.class)
-public class ProgramBlockEndTimeTest {
+public class ProgramBlockRoundingTest {
 
     @Parameterized.Parameters
     public static Collection data() {
-        List<Integer> possibleMilestonesInMinutes = new ArrayList<>();
+        List<BasicTimeMilestones> possibleMilestonesInMinutes = new ArrayList<>();
         for (BasicTimeMilestones btm : BasicTimeMilestones.values()) {
-            possibleMilestonesInMinutes.add(btm.getMinutes());
+            possibleMilestonesInMinutes.add(btm);
         }
         return possibleMilestonesInMinutes;
     }
 
     @Parameterized.Parameter
-    public int milestone;
+    public BasicTimeMilestones milestone;
 
     /**
      * For every possible basic time milestone the end time of a one hour block will never be rounded.
@@ -48,16 +47,16 @@ public class ProgramBlockEndTimeTest {
     @Test
     public void blockShouldBeRoundedToMultipleOfBasicMilestone() {
         ProgramBlock pb60 = getProgramBlock60(new Settings(milestone));
-        Assert.assertEquals("60 minutes block", 0, pb60.getEndTime().getMinute() % milestone);
+        Assert.assertEquals("60 minutes block", 0, pb60.getEndTime().getMinute() % milestone.getMinutes());
 
         ProgramBlock pb56 = getProgramBlock56(new Settings(milestone));
-        Assert.assertEquals("56 minutes block", 0, pb56.getEndTime().getMinute() % milestone);
+        Assert.assertEquals("56 minutes block", 0, pb56.getEndTime().getMinute() % milestone.getMinutes());
 
         ProgramBlock pb24 = getProgramBlock24(new Settings(milestone));
-        Assert.assertEquals("24 minutes block", 0, pb24.getEndTime().getMinute() % milestone);
+        Assert.assertEquals("24 minutes block", 0, pb24.getEndTime().getMinute() % milestone.getMinutes());
 
         ProgramBlock pb3 = getProgramBlock3(new Settings(milestone));
-        Assert.assertEquals("3 minutes block", 0, pb3.getEndTime().getMinute() % milestone);
+        Assert.assertEquals("3 minutes block", 0, pb3.getEndTime().getMinute() % milestone.getMinutes());
     }
 
     private ProgramBlock getProgramBlock60(Settings settings) {

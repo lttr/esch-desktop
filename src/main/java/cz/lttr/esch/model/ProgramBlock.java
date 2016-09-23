@@ -1,5 +1,8 @@
 package cz.lttr.esch.model;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import java.time.Duration;
 import java.time.LocalTime;
 
@@ -7,6 +10,8 @@ import java.time.LocalTime;
  * Created by Lukas Trumm on 13.09.2016
  */
 public class ProgramBlock {
+
+    private static final Logger logger = LoggerFactory.getLogger(ProgramBlock.class);
 
     private String name;
 
@@ -18,30 +23,67 @@ public class ProgramBlock {
 
     public ProgramBlock(String name, LocalTime startTime, Duration duration, Settings settings) {
         this.name = name;
-        this.startTime = startTime;
-        this.duration = duration;
+        setDuration(duration);
+        setStartTime(startTime);
         this.settings = settings;
     }
 
     public LocalTime getStartTime() {
-        return roundTimeUp(startTime, settings.getBasicTimeMilestone());
+        return roundTimeUp(startTime, settings.getBasicTimeMilestoneInMinutes());
     }
 
     public LocalTime getEndTime() {
         LocalTime exactEndTime = startTime.plus(duration);
-        return roundTimeUp(exactEndTime, settings.getBasicTimeMilestone());
+        return roundTimeUp(exactEndTime, settings.getBasicTimeMilestoneInMinutes());
     }
 
     public void plusDuration(Duration plusDuration) {
-        duration.plus(plusDuration);
+        this.duration = duration.plus(plusDuration);
     }
 
     public void minusDuration(Duration minusDuration) {
-        duration.minus(minusDuration);
+        setDuration(duration.minus(minusDuration));
     }
 
-    public void setStartTime(LocalTime startTime) {
-        this.startTime = startTime;
+    /**
+     * Makes sure the new start time will not cause the end time to be after midnight.
+     *
+     * @param newStartTime LocalTime which is intended to be set
+     */
+    public void setStartTime(LocalTime newStartTime) {
+        LocalTime maxStartTime = LocalTime.MIDNIGHT.minus(duration);
+        if (newStartTime.isAfter(maxStartTime)) {
+            this.startTime = maxStartTime;
+            logger.debug("New start time %s was replaced with maximal start time %s in order to not " +
+                    "exceed midnight.", newStartTime, maxStartTime);
+        } else {
+            this.startTime = newStartTime;
+        }
+    }
+
+    public Duration getDuration() {
+        return duration;
+    }
+
+
+    /**
+     * Makes sure duration is not negative.
+     */
+    private void setDuration(Duration newDuration) {
+        Duration maxDuration = Duration.ofHours(23);
+        Duration minDuration = Duration.ZERO;
+
+        if (newDuration.isNegative()) {
+            this.duration = minDuration;
+            logger.debug("Duration was set to minimal duration of %s", minDuration);
+        } else {
+            if (newDuration.compareTo(maxDuration) > 0) {
+                this.duration = maxDuration;
+                logger.debug("Duration was cut to maximal duration of %s hours.", maxDuration);
+            } else {
+                this.duration = newDuration;
+            }
+        }
     }
 
     /**

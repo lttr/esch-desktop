@@ -8,7 +8,7 @@ package cz.lttr.esch.model;
  *
  * Created by Lukas Trumm on 13.09.2016
  */
-enum BasicTimeMilestones {
+public enum BasicTimeMilestones {
     ONE_MINUTE(1),
     FIVE_MINUTES(5),
     TEN_MINUTES(10),
