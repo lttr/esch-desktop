@@ -3,9 +3,13 @@
 <?import javafx.scene.control.Menu?>
 <?import javafx.scene.control.MenuBar?>
 <?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.Pane?>
 
-<BorderPane fx:id="root" prefHeight="262.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/null" xmlns:fx="http://javafx.com/fxml/1">
+<BorderPane fx:id="rootPane" prefHeight="680.0" prefWidth="960.0" xmlns="http://javafx.com/javafx/null" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cz.lttr.esch.controller.RootController">
    <top>
       <MenuBar BorderPane.alignment="CENTER">
         <menus>
@@ -23,4 +27,23 @@
         </menus>
       </MenuBar>
    </top>
+   <center>
+      <TabPane prefHeight="233.0" prefWidth="395.0" tabClosingPolicy="UNAVAILABLE" BorderPane.alignment="CENTER">
+        <tabs>
+          <Tab text="Untitled Tab 1">
+            <content>
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+            </content>
+          </Tab>
+          <Tab closable="false" text="Intructors">
+            <content>
+              <fx:include fx:id="instructorList" source="InstructorList.fxml"/>
+            </content>
+          </Tab>
+        </tabs>
+      </TabPane>
+   </center>
+   <bottom>
+      <Pane prefHeight="20.0" prefWidth="960.0" BorderPane.alignment="CENTER" />
+   </bottom>
 </BorderPane>

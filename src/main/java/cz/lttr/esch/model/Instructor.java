@@ -8,9 +8,9 @@ import javafx.beans.property.StringProperty;
  */
 public class Instructor {
 
-    private StringProperty nickName;
-    private StringProperty firstName;
-    private StringProperty lastName;
+    private final StringProperty nickName;
+    private final StringProperty firstName;
+    private final StringProperty lastName;
 
     public Instructor(String nickName, String firstName, String lastName) {
         this.nickName = new SimpleStringProperty(nickName);

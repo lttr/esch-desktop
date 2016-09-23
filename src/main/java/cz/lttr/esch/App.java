@@ -1,6 +1,7 @@
 package cz.lttr.esch;
 
-import cz.lttr.esch.controller.FirstController;
+import cz.lttr.esch.controller.InstructorListController;
+import cz.lttr.esch.controller.RootController;
 import cz.lttr.esch.model.Instructor;
 import javafx.application.Application;
 import javafx.collections.FXCollections;
@@ -62,7 +63,7 @@ public class App extends Application {
         fillInstructors();
 
         // TEMPORARY
-        showInstructors();
+//        showInstructors();
 
         logger.info("JavaFX application starts with primary stage titled \"{}\"", primaryStage.getTitle());
     }
@@ -70,8 +71,12 @@ public class App extends Application {
     private void initRootLayout() {
         try {
             FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(App.class.getResource("view/RootLayout.fxml"));
+            loader.setLocation(getClass().getResource("view/RootLayout.fxml"));
             this.rootLayout = (BorderPane) loader.load();
+
+            RootController controller = loader.getController();
+            controller.setApp(this);
+
             Scene scene = new Scene(rootLayout);
             primaryStage.setScene(scene);
             primaryStage.show();
@@ -84,12 +89,13 @@ public class App extends Application {
     private void showInstructors() {
         try {
             FXMLLoader loader = new FXMLLoader();
+            loader.getController();
             loader.setLocation(App.class.getResource("view/InstructorList.fxml"));
             AnchorPane instructorList = loader.load();
 
             rootLayout.setCenter(instructorList);
 
-            FirstController controller = loader.getController();
+            InstructorListController controller = loader.getController();
             controller.setApp(this);
 
         } catch (IOException e) {
