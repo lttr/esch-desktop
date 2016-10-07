@@ -9,41 +9,30 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.Pane?>
 
-<BorderPane fx:id="rootPane" prefHeight="680.0" prefWidth="960.0" xmlns="http://javafx.com/javafx/null" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cz.lttr.esch.controller.RootController">
-   <top>
-      <MenuBar BorderPane.alignment="CENTER">
-        <menus>
-          <Menu mnemonicParsing="false" text="File">
-            <items>
-              <MenuItem mnemonicParsing="false" text="New" />
-              <MenuItem mnemonicParsing="false" text="Close" />
-            </items>
-          </Menu>
-          <Menu mnemonicParsing="false" text="Help">
-            <items>
-              <MenuItem mnemonicParsing="false" text="About" />
-            </items>
-          </Menu>
-        </menus>
-      </MenuBar>
-   </top>
-   <center>
-      <TabPane prefHeight="233.0" prefWidth="395.0" tabClosingPolicy="UNAVAILABLE" BorderPane.alignment="CENTER">
-        <tabs>
-          <Tab text="Untitled Tab 1">
-            <content>
-              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
-            </content>
-          </Tab>
-          <Tab closable="false" text="Intructors">
-            <content>
-              <fx:include fx:id="instructorList" source="InstructorList.fxml"/>
-            </content>
-          </Tab>
-        </tabs>
-      </TabPane>
-   </center>
-   <bottom>
-      <Pane prefHeight="20.0" prefWidth="960.0" BorderPane.alignment="CENTER" />
-   </bottom>
+<BorderPane fx:id="rootPane" xmlns="http://javafx.com/javafx/null" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="cz.lttr.esch.controller.RootController">
+  <top>
+    <MenuBar BorderPane.alignment="CENTER">
+      <Menu mnemonicParsing="false" text="File">
+        <MenuItem mnemonicParsing="false" text="New"/>
+        <MenuItem mnemonicParsing="false" text="Close"/>
+      </Menu>
+      <Menu mnemonicParsing="false" text="Help">
+        <MenuItem mnemonicParsing="false" text="About"/>
+      </Menu>
+    </MenuBar>
+  </top>
+  <center>
+    <TabPane tabClosingPolicy="UNAVAILABLE" BorderPane.alignment="CENTER">
+      <Tab closable="false" text="Intructors">
+        <fx:include fx:id="instructorList" source="InstructorList.fxml"/>
+      </Tab>
+      <Tab text="Untitled Tab 1">
+        <AnchorPane/>
+      </Tab>
+    </TabPane>
+  </center>
+  <bottom>
+    <Pane prefHeight="20" BorderPane.alignment="CENTER"/>
+  </bottom>
 </BorderPane>

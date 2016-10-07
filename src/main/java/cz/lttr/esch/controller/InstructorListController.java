@@ -6,11 +6,14 @@ import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.layout.AnchorPane;
 
 /**
  * Created by Lukas Trumm on 08.08.2016
  */
 public class InstructorListController {
+
+    public AnchorPane instructorList;
 
     @FXML private TableView<Instructor> instructorTable;
 
