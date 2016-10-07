@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Menu?>
 <?import javafx.scene.control.MenuBar?>
 <?import javafx.scene.control.MenuItem?>
@@ -7,7 +8,7 @@
 <?import javafx.scene.control.TabPane?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
-<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.HBox?>
 
 <BorderPane fx:id="rootPane" xmlns="http://javafx.com/javafx/null" xmlns:fx="http://javafx.com/fxml/1"
             fx:controller="cz.lttr.esch.controller.RootController">
@@ -25,7 +26,7 @@
   <center>
     <TabPane tabClosingPolicy="UNAVAILABLE" BorderPane.alignment="CENTER">
       <Tab closable="false" text="Intructors">
-        <fx:include fx:id="instructorList" source="InstructorList.fxml"/>
+        <fx:include fx:id="instructorListTab" source="InstructorList.fxml"/>
       </Tab>
       <Tab text="Untitled Tab 1">
         <AnchorPane/>
@@ -33,6 +34,10 @@
     </TabPane>
   </center>
   <bottom>
-    <Pane prefHeight="20" BorderPane.alignment="CENTER"/>
+    <HBox prefHeight="20" BorderPane.alignment="CENTER">
+      <children>
+        <Label fx:id="userMessageLabel"/>
+      </children>
+    </HBox>
   </bottom>
 </BorderPane>

@@ -1,6 +1,7 @@
 package cz.lttr.esch.controller;
 
 import cz.lttr.esch.dao.InMemoryIntructorDao;
+import cz.lttr.esch.message.UserMessageUtils;
 import cz.lttr.esch.model.Instructor;
 import javafx.fxml.FXML;
 import javafx.scene.control.TableColumn;
@@ -45,6 +46,18 @@ public class InstructorListController {
                 (observable, oldValue, newValue) -> showInstructorDetails(newValue));
     }
 
+
+    @FXML
+    private void handleDelete() {
+        int selectionIndex = instructorTable.getSelectionModel().getSelectedIndex();
+        if (selectionIndex >= 0) {
+            Instructor removed = instructorTable.getItems().remove(selectionIndex);
+            UserMessageUtils.showMessageToUser("Instructor " + removed.getNickName() + " has been deleted.");
+        } else {
+            UserMessageUtils.showMessageToUser("An instructor has to be selected in other to delete one.");
+        }
+    }
+
     private void showInstructorDetails(Instructor instructor) {
         if (instructor == null) {
             nickNameField.setText("");
@@ -56,4 +69,6 @@ public class InstructorListController {
             lastNameField.setText(instructor.getLastName());
         }
     }
+
+
 }

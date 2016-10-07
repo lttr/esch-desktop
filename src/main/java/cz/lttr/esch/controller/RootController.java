@@ -1,8 +1,9 @@
 package cz.lttr.esch.controller;
 
-import cz.lttr.esch.App;
+import cz.lttr.esch.message.UserMessageUtils;
 import javafx.fxml.FXML;
 import javafx.scene.Parent;
+import javafx.scene.control.Label;
 import javafx.scene.layout.BorderPane;
 
 /**
@@ -10,16 +11,14 @@ import javafx.scene.layout.BorderPane;
  */
 public class RootController {
 
-    public BorderPane rootPane;
+    @FXML private BorderPane rootPane;
+    @FXML private Label userMessageLabel;
+    @FXML private Parent instructorListTab;
+    @FXML private InstructorListController instructorListController;
 
-    @FXML
-    Parent instructorList;
-
-    @FXML
-    private InstructorListController instructorListController;
 
     public void initialize() {
-
+        UserMessageUtils.setUserMessageLabel(userMessageLabel);
     }
 
 }
