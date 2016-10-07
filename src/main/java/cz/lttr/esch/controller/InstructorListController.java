@@ -1,11 +1,11 @@
 package cz.lttr.esch.controller;
 
-import cz.lttr.esch.App;
+import cz.lttr.esch.dao.InMemoryIntructorDao;
 import cz.lttr.esch.model.Instructor;
 import javafx.fxml.FXML;
-import javafx.scene.control.TextField;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 
 /**
@@ -25,13 +25,16 @@ public class InstructorListController {
     @FXML private TextField firstNameField;
     @FXML private TextField lastNameField;
 
-    private App app;
+    private InMemoryIntructorDao dao;
 
     public InstructorListController() {
     }
 
     @FXML
     private void initialize() {
+        dao = new InMemoryIntructorDao();
+        instructorTable.setItems(dao.getInstructors());
+
         nickNameColumn.setCellValueFactory(cellData -> cellData.getValue().nickNameProperty());
         firstNameColumn.setCellValueFactory(cellData -> cellData.getValue().firstNameProperty());
         lastNameColumn.setCellValueFactory(cellData -> cellData.getValue().lastNameProperty());
@@ -40,12 +43,6 @@ public class InstructorListController {
 
         instructorTable.getSelectionModel().selectedItemProperty().addListener(
                 (observable, oldValue, newValue) -> showInstructorDetails(newValue));
-    }
-
-    public void setApp(App app) {
-        this.app = app;
-
-        instructorTable.setItems(app.getInstructors());
     }
 
     private void showInstructorDetails(Instructor instructor) {

@@ -32,22 +32,6 @@ public class App extends Application {
     }
 
     private Stage primaryStage;
-    private BorderPane rootLayout;
-
-    // TEMPORARY
-    private ObservableList<Instructor> instructors = FXCollections.observableArrayList();
-
-    // TEMPORARY
-    public ObservableList<Instructor> getInstructors() {
-        return instructors;
-    }
-
-    // TEMPORARY
-    private void fillInstructors() {
-        instructors.add(new Instructor("Koumák", "Petr", "Novák"));
-        instructors.add(new Instructor("Vařečka", "Alžběta", "Pečená"));
-        instructors.add(new Instructor("Koumák"));
-    }
 
     public static void main(String[] args) {
         launch(args);
@@ -59,12 +43,6 @@ public class App extends Application {
         this.primaryStage.setTitle("Esch");
         initRootLayout();
 
-        // TEMPORARY
-        fillInstructors();
-
-        // TEMPORARY
-//        showInstructors();
-
         logger.info("JavaFX application starts with primary stage titled \"{}\"", primaryStage.getTitle());
     }
 
@@ -72,10 +50,7 @@ public class App extends Application {
         try {
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(getClass().getResource("view/RootLayout.fxml"));
-            this.rootLayout = (BorderPane) loader.load();
-
-            RootController controller = loader.getController();
-            controller.setApp(this);
+            BorderPane rootLayout = loader.load();
 
             Scene scene = new Scene(rootLayout);
             primaryStage.setScene(scene);
@@ -85,21 +60,4 @@ public class App extends Application {
         }
     }
 
-    // TEMPORARY
-    private void showInstructors() {
-        try {
-            FXMLLoader loader = new FXMLLoader();
-            loader.getController();
-            loader.setLocation(App.class.getResource("view/InstructorList.fxml"));
-            AnchorPane instructorList = loader.load();
-
-            rootLayout.setCenter(instructorList);
-
-            InstructorListController controller = loader.getController();
-            controller.setApp(this);
-
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
 }

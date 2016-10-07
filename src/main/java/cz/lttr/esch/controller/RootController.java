@@ -22,7 +22,4 @@ public class RootController {
 
     }
 
-    public void setApp(App app) {
-        instructorListController.setApp(app);
-    }
 }
