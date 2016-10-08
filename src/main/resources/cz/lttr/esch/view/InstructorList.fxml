@@ -3,6 +3,7 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.scene.text.Text?>
 <AnchorPane fx:id="instructorList" AnchorPane.bottomAnchor="0" AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0"
             AnchorPane.topAnchor="0" xmlns="http://javafx.com/javafx/null" xmlns:fx="http://javafx.com/fxml/1"
             fx:controller="cz.lttr.esch.controller.InstructorListController">
@@ -18,20 +19,30 @@
       </TableView>
     </AnchorPane>
     <AnchorPane>
-      <padding>
-        <Insets bottom="30" right="30"/>
-      </padding>
-      <Label layoutX="24" layoutY="39" text="Nickname"/>
-      <TextField fx:id="nickNameField" layoutX="99" layoutY="34"/>
-      <Label layoutX="24" layoutY="77" text="First name"/>
-      <TextField fx:id="firstNameField" layoutX="99" layoutY="72"/>
-      <Label layoutX="23" layoutY="115" text="Last name"/>
-      <TextField fx:id="lastNameField" layoutX="99" layoutY="110"/>
-      <Label layoutX="23" layoutY="164" text="Color"/>
-      <ColorPicker layoutX="99" layoutY="159" prefHeight="26" prefWidth="164"/>
-      <Button layoutX="195" layoutY="328" mnemonicParsing="true" prefHeight="34" prefWidth="68" text="Save"/>
-      <Button layoutX="195" layoutY="250" mnemonicParsing="true" onAction="#handleDelete" prefHeight="34" prefWidth="68"
-              text="Delete"/>
+      <BorderPane>
+        <padding>
+          <Insets top="20" left="20" right="20" bottom="20"/>
+        </padding>
+        <center>
+          <GridPane alignment="CENTER" hgap="15" vgap="15">
+            <Label fx:id="editInstructorLabel" style="-fx-font-weight: bold;" GridPane.columnIndex="0"
+                   GridPane.rowIndex="0" GridPane.columnSpan="2"/>
+            <Label text="Nickname" GridPane.columnIndex="0" GridPane.rowIndex="1"/>
+            <TextField fx:id="nickNameField" disable="true" GridPane.columnIndex="1" GridPane.rowIndex="1"/>
+            <Label text="First name" GridPane.columnIndex="0" GridPane.rowIndex="2"/>
+            <TextField fx:id="firstNameField" disable="true" GridPane.columnIndex="1" GridPane.rowIndex="2"/>
+            <Label text="Last name" GridPane.columnIndex="0" GridPane.rowIndex="3"/>
+            <TextField fx:id="lastNameField" disable="true" GridPane.columnIndex="1" GridPane.rowIndex="3"/>
+            <HBox alignment="BOTTOM_CENTER" GridPane.columnIndex="0" GridPane.rowIndex="4"
+                  GridPane.columnSpan="2" spacing="15">
+              <Button mnemonicParsing="true" onAction="#handleNew" text="New instructor"/>
+              <Button mnemonicParsing="true" onAction="#handleDelete" text="Delete"/>
+              <Button mnemonicParsing="true" onAction="#handleSave" text="Save"/>
+            </HBox>
+            <Label fx:id="errorInstructorLabel" GridPane.columnIndex="0" GridPane.rowIndex="5" GridPane.columnSpan="2"/>
+          </GridPane>
+        </center>
+      </BorderPane>
     </AnchorPane>
   </SplitPane>
 </AnchorPane>
